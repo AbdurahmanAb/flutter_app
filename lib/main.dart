@@ -8,6 +8,7 @@ import 'package:e_commerce/screen/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   init();

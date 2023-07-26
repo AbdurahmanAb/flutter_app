@@ -60,6 +60,29 @@ class Popular extends StatelessWidget {
                     return Stack(
                       children: [
                         const AppIcon(icon: Icons.shopping_cart_outlined),
+                        Get.find<PopularController>().totalItems >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  backgroundColor: AppColors.mainColor,
+                                  iconColor: Colors.transparent,
+                                  size: 20,
+                                ))
+                            : Container(),
+                        Get.find<PopularController>().totalItems >= 1
+                            ? Positioned(
+                                right: 3,
+                                top: 3,
+                                child: Header(
+                                  text: Get.find<PopularController>()
+                                      .totalItems
+                                      .toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container()
                       ],
                     );
                   })
@@ -140,7 +163,7 @@ class Popular extends StatelessWidget {
                   SizedBox(
                     width: Dimensions.width15 / 2,
                   ),
-                  Header(text: PopularController.cartItmes.toString()),
+                  Header(text: PopularController.totalItems.toString()),
                   SizedBox(
                     width: Dimensions.width15 / 2,
                   ),
