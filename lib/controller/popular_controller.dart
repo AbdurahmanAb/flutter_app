@@ -1,4 +1,5 @@
 import 'package:e_commerce/controller/cart_controller.dart';
+import 'package:e_commerce/model/cart_model.dart';
 import 'package:e_commerce/model/popular_model.dart';
 import 'package:e_commerce/repository/popular_repo.dart';
 import 'package:e_commerce/utils/colors.dart';
@@ -52,6 +53,10 @@ class PopularController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if (_cartItems > 0) {
+        _quantity = -_cartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_cartItems + quantity) > 20) {
       Get.snackbar("ItemCount", "You Can't add more",
@@ -89,5 +94,9 @@ class PopularController extends GetxController {
 
   int get totalItems {
     return _cart.totalItem;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }

@@ -57,33 +57,41 @@ class Popular extends StatelessWidget {
                     ),
                   ),
                   GetBuilder<PopularController>(builder: (controller) {
-                    return Stack(
-                      children: [
-                        const AppIcon(icon: Icons.shopping_cart_outlined),
-                        Get.find<PopularController>().totalItems >= 1
-                            ? Positioned(
-                                right: 0,
-                                top: 0,
-                                child: AppIcon(
-                                  icon: Icons.circle,
-                                  backgroundColor: AppColors.mainColor,
-                                  iconColor: Colors.transparent,
-                                  size: 20,
-                                ))
-                            : Container(),
-                        Get.find<PopularController>().totalItems >= 1
-                            ? Positioned(
-                                right: 3,
-                                top: 3,
-                                child: Header(
-                                  text: Get.find<PopularController>()
-                                      .totalItems
-                                      .toString(),
-                                  size: 12,
-                                  color: Colors.white,
-                                ))
-                            : Container()
-                      ],
+                    return GestureDetector(
+                      onTap: () {
+                        if(controller.totalItems>=1){
+                          Get.toNamed(Routes.cart);
+                        }
+                      
+                      },
+                      child: Stack(
+                        children: [
+                          const AppIcon(icon: Icons.shopping_cart_outlined),
+                          controller.totalItems >= 1
+                              ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: AppIcon(
+                                    icon: Icons.circle,
+                                    backgroundColor: AppColors.mainColor,
+                                    iconColor: Colors.transparent,
+                                    size: 20,
+                                  ))
+                              : Container(),
+                          Get.find<PopularController>().totalItems >= 1
+                              ? Positioned(
+                                  right: 3,
+                                  top: 3,
+                                  child: Header(
+                                    text: Get.find<PopularController>()
+                                        .totalItems
+                                        .toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                                  ))
+                              : Container()
+                        ],
+                      ),
                     );
                   })
                 ],
@@ -163,7 +171,7 @@ class Popular extends StatelessWidget {
                   SizedBox(
                     width: Dimensions.width15 / 2,
                   ),
-                  Header(text: PopularController.totalItems.toString()),
+                  Header(text: PopularController.cartItmes.toString()),
                   SizedBox(
                     width: Dimensions.width15 / 2,
                   ),

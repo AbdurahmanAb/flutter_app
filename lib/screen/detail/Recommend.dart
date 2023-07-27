@@ -19,7 +19,7 @@ class Recommended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var recommended = Get.find<RecommendedController>().recommendedList[pageId];
-        Get.find<PopularController>()
+    Get.find<PopularController>()
         .initItem(recommended, Get.find<CartController>());
     return Scaffold(
       body: CustomScrollView(
@@ -37,7 +37,41 @@ class Recommended extends StatelessWidget {
                       Get.toNamed(Routes.getInital());
                     },
                     child: AppIcon(icon: Icons.clear)),
-                AppIcon(icon: Icons.shopping_cart)
+                GetBuilder<PopularController>(builder: (controller) {
+                  return GestureDetector(
+                    onTap: () {
+                     controller.totalItems>=1? Get.toNamed(Routes.cart):();
+                    },
+                    child: Stack(
+                      children: [
+                        const AppIcon(icon: Icons.shopping_cart_outlined),
+                        Get.find<PopularController>().totalItems >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  backgroundColor: AppColors.mainColor,
+                                  iconColor: Colors.transparent,
+                                  size: 20,
+                                ))
+                            : Container(),
+                        Get.find<PopularController>().totalItems >= 1
+                            ? Positioned(
+                                right: 3,
+                                top: 3,
+                                child: Header(
+                                  text: Get.find<PopularController>()
+                                      .totalItems
+                                      .toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container()
+                      ],
+                    ),
+                  );
+                })
               ],
             ),
             expandedHeight: 300,
@@ -105,7 +139,9 @@ class Recommended extends StatelessWidget {
                       ),
                     ),
                     Header(
-                      text: "\$ ${recommended.price} " + " X " + "${controller.cartItmes.toString()}",
+                      text: "\$ ${recommended.price} " +
+                          " X " +
+                          "${controller.cartItmes.toString()}",
                       size: Dimensions.font26,
                     ),
                     GestureDetector(
@@ -147,20 +183,25 @@ class Recommended extends StatelessWidget {
                         Icons.favorite,
                         color: AppColors.mainColor,
                       )),
-                  Container(
-                    child: Header(
-                      text: " \$ ${recommended.price} |  Add To Cart ",
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Get.find<PopularController>().addItem(recommended);
+                    },
+                    child: Container(
+                      child: Header(
+                        text: " \$ ${recommended.price} |  Add To Cart ",
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                          bottom: Dimensions.height20,
+                          top: Dimensions.height20),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: AppColors.mainColor),
                     ),
-                    padding: EdgeInsets.only(
-                        left: Dimensions.width20,
-                        right: Dimensions.width20,
-                        bottom: Dimensions.height20,
-                        top: Dimensions.height20),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: AppColors.mainColor),
                   )
                 ],
               ),
