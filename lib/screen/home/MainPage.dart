@@ -41,6 +41,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     pageController.dispose();
+super.dispose();
   }
 
   @override
@@ -240,7 +241,7 @@ class _MainPageState extends State<MainPage> {
                 right: Dimensions.width10,
                 top: Dimensions.width10),
             decoration: BoxDecoration(
-                color: index.isEven ? Colors.deepOrangeAccent : Colors.blue,
+                color: index.isEven ? Colors.orangeAccent : Colors.blue,
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 image: DecorationImage(
                     fit: BoxFit.cover,

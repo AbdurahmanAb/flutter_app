@@ -2,9 +2,12 @@ import 'package:e_commerce/screen/cart/cart_page.dart';
 import 'package:e_commerce/screen/detail/Recommend.dart';
 import 'package:e_commerce/screen/detail/popular_items.dart';
 import 'package:e_commerce/screen/home/MainPage.dart';
+import 'package:e_commerce/screen/home/home_screen.dart';
+import 'package:e_commerce/screen/splash/splash.dart';
 import 'package:get/get.dart';
 
 class Routes {
+  static const String splash = "/splash";
   static const String initial = "/";
   static const String PopularPage = "/popular";
   static const String RecommendedPage = "/recommended";
@@ -15,7 +18,8 @@ class Routes {
   static String getRecommended(int pageId) => '$RecommendedPage?pageId=$pageId';
 
   static List<GetPage> route = [
-    GetPage(name: initial, page: () => MainPage()),
+    GetPage(name: splash, page: () => SplashScreen()),
+    GetPage(name: initial, page: () => FullHome()),
     GetPage(
         name: PopularPage,
         page: () {

@@ -33,6 +33,7 @@ class Dimensions {
   static double width20 = screeHeight / 36.55;
   static double width25 = screeHeight / 29.94;
   static double width30 = screeHeight / 24.34;
+  static double width300 = screeHeight / 2.434;
 
   //FontSize
 
