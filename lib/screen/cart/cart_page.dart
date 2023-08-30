@@ -78,7 +78,7 @@ class CartPage extends StatelessWidget {
                           height: Dimensions.height20 * 5,
                           width: double.maxFinite,
                           child: GestureDetector(
-                             onTap: () {
+                            onTap: () {
                               var product = Get.find<PopularController>()
                                   .popularList
                                   .indexOf(
@@ -202,9 +202,9 @@ class CartPage extends StatelessWidget {
               )),
         ],
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: GetBuilder<CartController>(builder: (Cartcontext) {
+        return Container(
           height: Dimensions.height70,
-          
           margin: EdgeInsets.only(bottom: Dimensions.height10),
           padding: EdgeInsets.only(
               top: Dimensions.height10,
@@ -224,11 +224,11 @@ class CartPage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.white),
-                child: Header(text: "7502"),
+                child: Header(text:"\$" + Cartcontext.getPrices().toString()),
               ),
               GestureDetector(
                 onTap: () {
-                //  PopularController.addItem(products);
+                  Cartcontext.addToHistory();
                 },
                 child: Container(
                   child: Header(
@@ -247,7 +247,8 @@ class CartPage extends StatelessWidget {
               )
             ],
           ),
-        ),
+        );
+      }),
     );
   }
 }

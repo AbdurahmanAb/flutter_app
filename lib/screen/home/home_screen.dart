@@ -1,3 +1,4 @@
+import 'package:e_commerce/screen/cart/cart_history.dart';
 import 'package:e_commerce/screen/home/MainPage.dart';
 import 'package:e_commerce/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -15,15 +16,12 @@ class FullHome extends StatefulWidget {
 
 class _FullHomeState extends State<FullHome> {
   int _currentIndex = 0;
-  List _pages = [
+  final List _pages = [
     Home(),
-
     Container(
       child: Center(child: Text("Hello")),
     ),
-    Container(
-      child: Center(child: Text("Hello 2")),
-    ),
+    CartHistory(),
     Container(
       child: Center(child: Text("Hello  3")),
     )
@@ -33,7 +31,7 @@ class _FullHomeState extends State<FullHome> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-currentIndex: _currentIndex,
+        currentIndex: _currentIndex,
         selectedItemColor: AppColors.mainColor,
         unselectedItemColor: Colors.deepPurpleAccent,
         onTap: (index) {

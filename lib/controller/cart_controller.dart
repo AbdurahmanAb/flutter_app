@@ -101,4 +101,44 @@ class CartController extends GetxController {
       _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
     }
   }
+
+  void addToHistory() {
+    cartRepo.addToCartHistory();
+    clear();
+  }
+
+  void clear() {
+    _items = {};
+    update();
+  }
+
+  int getPrices() {
+    int value = 0;
+
+    if (_items.isNotEmpty) {
+      for (int i = 0; i < _items.length; i++) {
+        value += getItems[i].quantity! * getItems[i].price!;
+      }
+    }
+
+    return value;
+  }
+
+  List<CartModel> getCartHistoryList() {
+    return cartRepo.getCartHistoryList();
+  }
+
+  Map<String, int> getItemsPerOrder() {
+    Map<String, int> ItemsPerOrder = Map();
+    for (int i = 0; i < getCartHistoryList().length; i++) {
+      if (ItemsPerOrder.containsKey(getCartHistoryList()[i].time)) {
+        ItemsPerOrder.update(
+            getCartHistoryList()[i].time.toString(), (value) => ++value);
+      } else {
+        ItemsPerOrder.putIfAbsent(
+            getCartHistoryList()[i].time.toString(), () => 1);
+      }
+    }
+    return ItemsPerOrder;
+  }
 }

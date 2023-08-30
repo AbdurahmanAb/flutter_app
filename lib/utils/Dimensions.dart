@@ -22,6 +22,7 @@ class Dimensions {
   static double height25 = screeHeight / 29.94;
   static double height45 = screeHeight / 16.4;
   static double height70 = screeHeight / 10.44;
+    static double height100 = screeHeight / 7.41;
 
 //container
   static double TextcontainerHeight = screeHeight / 7.34;

@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
     return GetBuilder<PopularController>(builder: (context) {
       return GetBuilder<RecommendedController>(builder: (context) {
         return GetMaterialApp(
+        
+          theme: ThemeData(),
+          darkTheme: ThemeData(brightness: Brightness.dark),
           debugShowCheckedModeBanner: false,
           title: "Food Delivery",
           initialRoute: Routes.splash,
